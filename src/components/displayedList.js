@@ -1,9 +1,11 @@
-import flagIcon from '../assets/imgs/flag-solid.svg';
-
 const DisplayedList = props => {
-  const listItems = props.items.map(item => (
-    <ListItem key={item.id} item={item} />
-  ));
+  let listItems = <div className="empty-list">No subscriptions match these criteria — try adjusting the filters to see more results! </div>
+
+  if (props.items.length > 0) {
+    listItems = props.items.map(item => (
+      <ListItem key={item.id} item={item} />
+    ));
+  }
 
   return(
     <div className="list-items">
@@ -22,7 +24,7 @@ const ListItem = props => {
           <div className="item-name">{name}</div>
           <div className="flex item-tags">
             <div className={`item-tag ${category}-cat`}>{category}</div>
-            <div className={`item-tag ${priceCategory}-price`}>${price}</div>
+            <div className={`item-tag ${priceCategory}-price`}>${price} / month</div>
           </div>
         </div>
       </div>
