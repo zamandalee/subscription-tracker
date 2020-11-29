@@ -3,15 +3,16 @@
   --navy: #315171;
   --mid-navy: #7e92a7;
   --light-navy: #b1becc;
-  --salmon: #ee9089;
   --clear-navy: #31517126;
+  --salmon: #ee9089;
+  --dark-salmon: #c28184;
 }
 
 /* CSS RESET */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, input, ins, kbd, q, s, samp,
+del, dfn, em, img, input, select, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
@@ -68,16 +69,22 @@ body {
 }
 
 /* HEADER */
-.header-text {
+.header {
   margin: 3em 0 1.5em 0;
-  letter-spacing: 0.05em;
 }
-.header-text > img {
-  width: 7%;
+.header > img {
+  width: 9%;
+}
+.header-text {
+  margin-left: 1em;
 }
 .header-text > h1 {
+  margin-bottom: 0.25em;
   font-size: 3em;
-  margin-left: 0.25em;
+  letter-spacing: 0.05em;
+}
+.header-text > h3 {
+  font-size: 13px;
 }
 .header-bar-container {
   width: 100%;

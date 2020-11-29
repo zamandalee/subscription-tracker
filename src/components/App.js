@@ -37,10 +37,13 @@ const subscriptionList = [
 function App() {
   return (
     <div className="app">
-      <header className="flex-col">
-        <div className="flex-start header-text">
+      <header className="flex-col-start">
+        <div className="flex-start header">
           <img src={logo} alt="logo" />
-          <h1>Subscription Manager</h1>
+          <div className="flex-col-start header-text">
+            <h1>Subscription Manager</h1>
+            <h3>Stay financially empowered — track your ongoing subscription service payments.</h3>
+          </div>
         </div>
 
         <div className="header-bar-container">
