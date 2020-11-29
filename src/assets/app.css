@@ -1,0 +1,97 @@
+/* COLORS */
+:root {
+  --navy: #315171;
+  --mid-navy: #7e92a7;
+  --light-navy: #b1becc;
+  --salmon: #ee9089;
+  --clear-navy: #31517126;
+}
+
+/* CSS RESET */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, input, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+  font-size: 100%;
+  font-weight: 400;
+	font: inherit;
+  vertical-align: baseline;
+  color: var(--navy);
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+
+body {
+  margin: 3% 5%;
+  font-family: "Open Sans",sans-serif;
+}
+
+/* SHARED */
+.flex, .flex-start, .flex-between, .flex-col, .flex-col-start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-start {
+  justify-content: flex-start;
+}
+.flex-between {
+  justify-content: space-between;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-col-start {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* HEADER */
+.header-text {
+  margin: 3em 0 1.5em 0;
+  letter-spacing: 0.05em;
+}
+.header-text > img {
+  width: 7%;
+}
+.header-text > h1 {
+  font-size: 3em;
+  margin-left: 0.25em;
+}
+.header-bar-container {
+  width: 100%;
+  height: 9px;
+  margin-bottom: 3em;
+  overflow: hidden;
+  background: #e4eff2;
+  border-radius: 20px;
+}
+.header-bar {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 40px;
+  transition: width .1s ease-in-out;
+  background: linear-gradient(270deg, var(--salmon) -30.45%, var(--navy)),#461b8a;
+  border-radius: 20px;
+}

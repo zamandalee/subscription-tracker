@@ -1,0 +1,46 @@
+/* LIST CONTAINER */
+
+
+/* LIST FILTERS */
+
+
+/* DISPLAYED LIST */
+
+/* LIST ITEM */
+.list-item {
+  padding: 1.5em;
+  border-bottom: 1px solid var(--clear-navy);
+}
+.item-logo {
+  width: 12%;
+}
+.item-text {
+  padding-left: 4%;
+}
+.item-name {
+  padding-bottom: 9px;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+}
+/* Item tags */
+.item-tag {
+  margin-right: 10px;
+  padding: 3px 7px;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.05vh;
+  border: 1px solid var(--light-navy);
+  border-radius: 3px;
+}
+/* Item flag */
+.item-flag {
+  width: 7%;
+  cursor: pointer;
+  color: var(--light-navy);
+}
+.item-flag:hover, .item-flag.flagged:hover {
+  color: var(--mid-navy);
+}
+.item-flag.flagged {
+  color: var(-navy);
+}
