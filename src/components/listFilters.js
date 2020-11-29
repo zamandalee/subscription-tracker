@@ -5,7 +5,7 @@ const ListFilters = (props) => {
 
   return (
     <div className="list-filters">
-      <label htmlFor="category">Category:</label>
+      <label htmlFor="category">Filter by category:</label>
       <select name="category" onChange={e => handleCategoryFilter(e.target.value)}>
         <option value="none">All</option>
         <option value="ecommerce">E-commerce</option>
@@ -15,12 +15,12 @@ const ListFilters = (props) => {
         <option value="streaming">Streaming</option>
       </select>
 
-      <label htmlFor="price">Price range:</label>
+      <label htmlFor="price">Filter by price:</label>
       <select name="price" onChange={e => handlePriceFilter(e.target.value)}>
         <option value="none">All</option>
-        <option value={lowPriceObj}>$0-11.99</option>
-        <option value={midPriceObj}>$12-29.99</option>
-        <option value={highPriceObj}>$30+</option>
+        <option value={JSON.stringify(lowPriceObj)}>$0-11.99</option>
+        <option value={JSON.stringify(midPriceObj)}>$12-29.99</option>
+        <option value={JSON.stringify(highPriceObj)}>$30+</option>
       </select>
 
       <label htmlFor="sort">Sort by name:</label>

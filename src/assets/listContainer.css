@@ -2,13 +2,26 @@
 
 
 /* LIST FILTERS */
-
+.list-filters > select {
+  border: 1px solid var(--light-navy);
+  padding: 0.15em 0 0.15em 0.3em;
+  margin: 0 2em 0 0.5em;
+  border-radius: 4px;
+  font-size: 15px;
+}
 
 /* DISPLAYED LIST */
+.list-items {
+  margin-top: 40px;
+}
+.empty-list {
+  color: var(--light-navy);
+  font-size: 20px;
+}
 
 /* LIST ITEM */
 .list-item {
-  padding: 1.5em;
+  padding: 1.5em 3em 1.5em 1.5em;
   border-bottom: 1px solid var(--clear-navy);
 }
 .item-logo {
@@ -34,7 +47,7 @@
 }
 /* Item flag */
 .item-flag {
-  width: 7%;
+  font-size: 1.25em;
   cursor: pointer;
   color: var(--light-navy);
 }
