@@ -55,5 +55,5 @@
   color: var(--mid-navy);
 }
 .item-flag.flagged {
-  color: var(-navy);
+  color: var(--navy);
 }

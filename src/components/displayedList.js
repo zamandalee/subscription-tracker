@@ -1,10 +1,17 @@
 const DisplayedList = props => {
-  let listItems = <div className="empty-list">No subscriptions match these criteria — try adjusting the filters to see more results! </div>
+  const { items, infrequentItems, toggleInfrequent, isInfrequentList } = props;
+  debugger
 
-  if (props.items.length > 0) {
-    listItems = props.items.map(item => (
-      <ListItem key={item.id} item={item} />
-    ));
+  let listItems = <div className="empty-list">No subscriptions match this criteria.</div>
+  if (items.length > 0) {
+    listItems = items.map(item => {
+      const isInfrequent = isInfrequentList || infrequentItems.findIndex(infreq => infreq.id === item.id) >= 0;
+
+      return <ListItem key={item.id}
+        item={item}
+        isInfrequent={isInfrequent}
+        toggleInfrequent={toggleInfrequent} />
+    });
   }
 
   return(
@@ -15,7 +22,12 @@ const DisplayedList = props => {
 }
 
 const ListItem = props => {
-  const { name, img, category, price, priceCategory } = props.item;
+  console.log(props)
+  const { item, isInfrequent, toggleInfrequent } = props
+  const { name, img, category, price, priceCategory } = item;
+
+  const flagClass = isInfrequent ? 'flagged' : '';
+
   return (
     <div className="flex-between list-item">
       <div className="flex-start">
@@ -29,7 +41,7 @@ const ListItem = props => {
         </div>
       </div>
 
-      <i className="fas fa-flag item-flag"></i>
+      <i className={`fas fa-flag item-flag ${flagClass}`} onClick={() => toggleInfrequent(props.item)}></i>
     </div>
   )
 }

@@ -9,23 +9,25 @@ class ListContainer extends Component {
     this.state = {
       categoryFilter: 'none', // if categoryFilter is enacted eg: 'entertainment'
       priceFilter: 'none', // if priceFilter is enacted eg: { lowerBound: 0, upperBound: 12 }
-      nameSortDir: 'none' // if nameSortDir is enacted eg: 'asc' or 'desc'
+      nameSortDir: 'none', // if nameSortDir is enacted eg: 'asc' or 'desc'
+      infrequentItems: []
     }
   }
 
-  handleCategoryFilter = (category) => {
+  // Filtering and sorting:
+  handleCategoryFilter = category => {
     this.setState({ categoryFilter: category });
   }
 
-  handlePriceFilter = (price) => {
+  handlePriceFilter = price => {
     this.setState({ priceFilter: price });
   }
 
-  handleSort = (nameSortDir) => {
+  handleSort = nameSortDir => {
     this.setState({ nameSortDir });
   }
 
-  filter = (items) => {
+  filter = items => {
     // Filter items according to the selected filter(s) saved in this.state
     const { categoryFilter, priceFilter } = this.state;
 
@@ -38,7 +40,7 @@ class ListContainer extends Component {
     })
   }
 
-  sort = (items) => {
+  sort = items => {
     // Sort items by name according to the selected sort direction
     const { nameSortDir } = this.state;
 
@@ -50,18 +52,42 @@ class ListContainer extends Component {
     return items; // Unsorted
   }
 
+  // Marking infrequent:
+  toggleInfrequent = item => {
+    const { infrequentItems } = this.state;
+    const infrequentIdx = infrequentItems.findIndex(infreq => infreq.id === item.id)
+
+    if (infrequentIdx >= 0) {
+      // Currently marked infrequent, remove from infrequent list
+      this.setState({ infrequentItems: infrequentItems.filter(infreq => infreq.id !== item.id) })
+    } else {
+      // Not currently marked infrequent, add to infrequent list
+      this.setState({ infrequentItems: infrequentItems.concat(item) })
+    }
+    debugger
+  }
+
   render() {
     const filteredItems = this.filter(this.props.items);
-    // const filteredItems = this.props.items.filter(this.filterItem);
     const items = this.sort(filteredItems);
+    const { infrequentItems } = this.state;
 
     return (
       <div className="">
+        <DisplayedList
+          items={infrequentItems}
+          infrequentItems={infrequentItems}
+          toggleInfrequent={this.toggleInfrequent}
+          isInfrequentList={true} />
+
         <ListFilters
           handleCategoryFilter={this.handleCategoryFilter}
           handlePriceFilter={this.handlePriceFilter}
           handleSort={this.handleSort} />
-        <DisplayedList items={items} />
+        <DisplayedList
+          items={items}
+          infrequentItems={infrequentItems}
+          toggleInfrequent={this.toggleInfrequent} />
       </div>
     );
   }
