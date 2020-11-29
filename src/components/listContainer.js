@@ -7,76 +7,61 @@ class ListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: props.items,
       categoryFilter: 'none', // if categoryFilter is enacted eg: 'entertainment'
       priceFilter: 'none', // if priceFilter is enacted eg: { lowerBound: 0, upperBound: 12 }
       nameSortDir: 'none' // if nameSortDir is enacted eg: 'asc' or 'desc'
     }
-
-    this.handleCategoryFilter = this.handleCategoryFilter.bind(this)
-    this.handlePriceFilter = this.handlePriceFilter.bind(this)
-    this.handleSort = this.handleSort.bind(this)
-    this.filter = this.filter.bind(this)
-    this.sort = this.sort.bind(this)
   }
 
-  handleCategoryFilter(category) {
-    this.setState(
-      { categoryFilter: category },
-      () => { this.setState({ items: this.filter(this.props.items) }) }
-    );
+  handleCategoryFilter = (category) => {
+    this.setState({ categoryFilter: category });
   }
 
-  handlePriceFilter(price) {
-    this.setState(
-      { priceFilter: price },
-      () => { this.setState({ items: this.filter(this.props.items) }) }
-    );
+  handlePriceFilter = (price) => {
+    this.setState({ priceFilter: price });
   }
 
-  handleSort(nameSortDir) {
-    this.setState(
-      { nameSortDir },
-      () => this.setState({ items: this.sort(this.state.items) })
-    );
+  handleSort = (nameSortDir) => {
+    this.setState({ nameSortDir });
   }
 
-  filter(items) {
+  filter = (items) => {
     // Filter items according to the selected filter(s) saved in this.state
     const { categoryFilter, priceFilter } = this.state;
 
     return items.filter(item => {
-      const includedCategory = categoryFilter === 'none' || item.category === categoryFilter;
-      const includedPrice = priceFilter === 'none' || (
-        item.price >= priceFilter.lowerBound && item.price < priceFilter.upperBound
+      const categoryIncluded = categoryFilter === 'none' || item.category === categoryFilter;
+      const priceIncluded = priceFilter === 'none' || (
+        item.price >= JSON.parse(priceFilter).lowerBound && item.price < JSON.parse(priceFilter).upperBound
       );
-      // debugger
-      return includedCategory && includedPrice;
-    });
+      return categoryIncluded && priceIncluded;
+    })
   }
 
-  sort(items) {
+  sort = (items) => {
     // Sort items by name according to the selected sort direction
     const { nameSortDir } = this.state;
 
     if (nameSortDir === 'desc') {
-      return items.sort((a, b) => (a.name - b.name)); // A-Z
+      return items.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)); // A-Z
     } else if (nameSortDir === 'asc') {
-      debugger
-      return items.sort((a, b) => (b.name - a.name)); // Z-A
+      return items.sort((a, b) => (b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1)); // Z-A
     }
     return items; // Unsorted
   }
 
   render() {
-    debugger
+    const filteredItems = this.filter(this.props.items);
+    // const filteredItems = this.props.items.filter(this.filterItem);
+    const items = this.sort(filteredItems);
+
     return (
       <div className="">
         <ListFilters
           handleCategoryFilter={this.handleCategoryFilter}
           handlePriceFilter={this.handlePriceFilter}
           handleSort={this.handleSort} />
-        <DisplayedList items={this.state.items} />
+        <DisplayedList items={items} />
       </div>
     );
   }
