@@ -1,6 +1,7 @@
-const DisplayedList = props => {
+import Tooltip from '@material-ui/core/Tooltip';
+
+const SubscriptionList = props => {
   const { items, infrequentItems, toggleInfrequent, isInfrequentList } = props;
-  debugger
 
   let listItems = <div className="empty-list">No subscriptions match this criteria.</div>
   if (items.length > 0) {
@@ -22,7 +23,6 @@ const DisplayedList = props => {
 }
 
 const ListItem = props => {
-  console.log(props)
   const { item, isInfrequent, toggleInfrequent } = props
   const { name, img, category, price, priceCategory } = item;
 
@@ -41,9 +41,11 @@ const ListItem = props => {
         </div>
       </div>
 
-      <i className={`fas fa-flag item-flag ${flagClass}`} onClick={() => toggleInfrequent(props.item)}></i>
+      <Tooltip title="Mark as an infrequently used subscription" arrow>
+        <i className={`fas fa-flag item-flag ${flagClass}`} onClick={() => toggleInfrequent(props.item)}></i>
+      </Tooltip>
     </div>
   )
 }
 
-export default DisplayedList;
+export default SubscriptionList;
