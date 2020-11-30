@@ -80,7 +80,7 @@ body {
 }
 .header-text > h1 {
   margin-bottom: 0.25em;
-  font-size: 3em;
+  font-size: 3.25em;
   letter-spacing: 0.05em;
 }
 .header-text > h3 {
@@ -89,7 +89,7 @@ body {
 .header-bar-container {
   width: 100%;
   height: 9px;
-  margin-bottom: 3em;
+  margin-bottom: 4em;
   overflow: hidden;
   background: #e4eff2;
   border-radius: 20px;
