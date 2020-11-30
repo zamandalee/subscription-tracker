@@ -75,12 +75,16 @@ class ListContainer extends Component {
   }
 
   renderSelectedList = items => {
-    const { infrequentItems, displayedList } = this.state;
+    // Render either the filters and all subscriptions, or the infrequently used subscriptions and their summed cost
+    const { categoryFilter, priceFilter, nameSortDir, infrequentItems, displayedList } = this.state;
 
     if (displayedList === 'all') {
       return (
         <div>
           <ListFilters
+            category={categoryFilter}
+            price={priceFilter}
+            sortDir={nameSortDir}
             handleCategoryFilter={this.handleCategoryFilter}
             handlePriceFilter={this.handlePriceFilter}
             handleSort={this.handleSort} />
@@ -91,12 +95,16 @@ class ListContainer extends Component {
         </div>
       )
     } else {
+      const infreqCost = infrequentItems.reduce((total, item) => total + item.price, 0);
       return (
-        <SubscriptionList
-          items={infrequentItems}
-          infrequentItems={infrequentItems}
-          toggleInfrequent={this.toggleInfrequent}
-          isInfrequentList={true} />
+        <div>
+          <SubscriptionList
+            items={infrequentItems}
+            infrequentItems={infrequentItems}
+            toggleInfrequent={this.toggleInfrequent}
+            isInfrequentList={true} />
+          <div className="infreq-cost"><span className="mid-navy">Total cost: </span>${infreqCost} / month</div>
+        </div>
       )
     }
   }

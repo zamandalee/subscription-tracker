@@ -67,6 +67,9 @@ body {
   flex-direction: column;
   align-items: flex-start;
 }
+.mid-navy {
+  color: var(--mid-navy);
+}
 
 /* HEADER */
 .header {

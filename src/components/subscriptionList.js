@@ -3,7 +3,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const SubscriptionList = props => {
   const { items, infrequentItems, toggleInfrequent, isInfrequentList } = props;
 
-  let listItems = <div className="empty-list">No subscriptions match this criteria.</div>
+  let listItems = <div className="empty-list">No results.</div>
   if (items.length > 0) {
     listItems = items.map(item => {
       const isInfrequent = isInfrequentList || infrequentItems.findIndex(infreq => infreq.id === item.id) >= 0;
