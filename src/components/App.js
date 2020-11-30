@@ -1,7 +1,7 @@
 import ListContainer from './listContainer.js';
 import '../assets/app.css';
 
-import logo from '../assets/imgs/logo.jpg';
+import logo from '../assets/imgs/logo.png';
 import audible from '../assets/imgs/audible.png';
 import billie from '../assets/imgs/billie.png';
 import classpass from '../assets/imgs/classpass.png';
