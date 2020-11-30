@@ -13,7 +13,7 @@ class ListContainer extends Component {
       priceFilter: 'none', // if priceFilter is enacted eg: { lowerBound: 0, upperBound: 12 }
       nameSortDir: 'none', // if nameSortDir is enacted eg: 'asc' or 'desc'
       infrequentItems: [],
-      displayedList: 'all'
+      displayedList: 'all' // either 'all' or 'infrequent'
     }
   }
 
@@ -31,7 +31,7 @@ class ListContainer extends Component {
   }
 
   filter = items => {
-    // Filter items according to the selected filter(s) saved in this.state
+    // Filter items according to the selected filter(s) stored in this.state
     const { categoryFilter, priceFilter } = this.state;
 
     return items.filter(item => {
@@ -44,7 +44,7 @@ class ListContainer extends Component {
   }
 
   sort = items => {
-    // Sort items by name according to the selected sort direction
+    // Sort items by name according to the selected sort direction stored in this.state
     const { nameSortDir } = this.state;
 
     if (nameSortDir === 'desc') {
@@ -57,6 +57,7 @@ class ListContainer extends Component {
 
   // Marking infrequent:
   toggleInfrequent = item => {
+    // Either add to or remove from current infrequent items list stored in this.state
     const { infrequentItems } = this.state;
     const infrequentIdx = infrequentItems.findIndex(infreq => infreq.id === item.id)
 
@@ -75,7 +76,7 @@ class ListContainer extends Component {
   }
 
   renderSelectedList = items => {
-    // Render either the filters and all subscriptions, or the infrequently used subscriptions and their summed cost
+    // Render either the filters & all subscriptions, or the infrequently used subscriptions & their summed cost
     const { categoryFilter, priceFilter, nameSortDir, infrequentItems, displayedList } = this.state;
 
     if (displayedList === 'all') {
@@ -110,9 +111,11 @@ class ListContainer extends Component {
   }
 
   render() {
+    // Filter and sort
     const filteredItems = this.filter(this.props.items);
     const items = this.sort(filteredItems);
 
+    // Styling for selected tab
     const allSelectedClass = this.state.displayedList === 'all' ? 'selected' : ''
     const infreqSelectedClass = this.state.displayedList === 'infrequent' ? 'selected' : ''
 
