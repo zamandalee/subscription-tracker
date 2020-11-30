@@ -1,6 +1,8 @@
 import { Component } from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import ListFilters from './listFilters.js';
-import DisplayedList from './displayedList.js';
+import SubscriptionList from './subscriptionList.js';
 import '../assets/listContainer.css';
 
 class ListContainer extends Component {
@@ -10,7 +12,8 @@ class ListContainer extends Component {
       categoryFilter: 'none', // if categoryFilter is enacted eg: 'entertainment'
       priceFilter: 'none', // if priceFilter is enacted eg: { lowerBound: 0, upperBound: 12 }
       nameSortDir: 'none', // if nameSortDir is enacted eg: 'asc' or 'desc'
-      infrequentItems: []
+      infrequentItems: [],
+      displayedList: 'all'
     }
   }
 
@@ -64,30 +67,63 @@ class ListContainer extends Component {
       // Not currently marked infrequent, add to infrequent list
       this.setState({ infrequentItems: infrequentItems.concat(item) })
     }
-    debugger
+  }
+
+  // Selecting a list tab:
+  handleSelectList = listName => {
+    this.setState({ displayedList: listName });
+  }
+
+  renderSelectedList = items => {
+    const { infrequentItems, displayedList } = this.state;
+
+    if (displayedList === 'all') {
+      return (
+        <div>
+          <ListFilters
+            handleCategoryFilter={this.handleCategoryFilter}
+            handlePriceFilter={this.handlePriceFilter}
+            handleSort={this.handleSort} />
+          <SubscriptionList
+            items={items}
+            infrequentItems={infrequentItems}
+            toggleInfrequent={this.toggleInfrequent} />
+        </div>
+      )
+    } else {
+      return (
+        <SubscriptionList
+          items={infrequentItems}
+          infrequentItems={infrequentItems}
+          toggleInfrequent={this.toggleInfrequent}
+          isInfrequentList={true} />
+      )
+    }
   }
 
   render() {
     const filteredItems = this.filter(this.props.items);
     const items = this.sort(filteredItems);
-    const { infrequentItems } = this.state;
+
+    const allSelectedClass = this.state.displayedList === 'all' ? 'selected' : ''
+    const infreqSelectedClass = this.state.displayedList === 'infrequent' ? 'selected' : ''
 
     return (
       <div className="">
-        <DisplayedList
-          items={infrequentItems}
-          infrequentItems={infrequentItems}
-          toggleInfrequent={this.toggleInfrequent}
-          isInfrequentList={true} />
+        <div className="flex-start list-tabs">
+          <Tooltip title="All subscriptions" arrow>
+            <div className={`list-tab shorter-tab ${allSelectedClass}`}
+              onClick={() => this.handleSelectList('all')}>
+              All</div>
+          </Tooltip>
+          <Tooltip title="Subscriptions marked infrequently used — consider cancelling!" arrow>
+            <div className={`list-tab ${infreqSelectedClass}`}
+              onClick={() => this.handleSelectList('infrequent')}>
+              Infrequently used</div>
+          </Tooltip>
+        </div>
 
-        <ListFilters
-          handleCategoryFilter={this.handleCategoryFilter}
-          handlePriceFilter={this.handlePriceFilter}
-          handleSort={this.handleSort} />
-        <DisplayedList
-          items={items}
-          infrequentItems={infrequentItems}
-          toggleInfrequent={this.toggleInfrequent} />
+        {this.renderSelectedList(items)}
       </div>
     );
   }

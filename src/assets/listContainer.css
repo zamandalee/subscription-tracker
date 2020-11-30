@@ -1,5 +1,24 @@
-/* LIST CONTAINER */
-
+/* LIST TABS */
+.list-tabs {
+  margin-bottom: 45px;
+}
+.list-tab {
+  margin-right: 1.5em;
+  padding-bottom: 0.25em;
+  font-size: 23px;
+  /* font-weight: 600; */
+  color: var(--light-navy);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+.list-tab.shorter-tab {
+  padding: 0 0.15em 0.25em 0.15em;
+  letter-spacing: 0.05em;
+}
+.list-tab.selected {
+  color: var(--navy);
+  border-bottom: 2px solid var(--navy);
+}
 
 /* LIST FILTERS */
 .list-filters > select {
@@ -12,9 +31,10 @@
 
 /* DISPLAYED LIST */
 .list-items {
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .empty-list {
+  margin-top: 25px;
   color: var(--light-navy);
   font-size: 20px;
 }
@@ -52,7 +72,8 @@
   color: var(--light-navy);
 }
 .item-flag:hover, .item-flag.flagged:hover {
-  color: var(--mid-navy);
+  transform: scale(1.1);
+  transition: all .2s ease-in-out;
 }
 .item-flag.flagged {
   color: var(--navy);
