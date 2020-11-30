@@ -71,7 +71,7 @@ class ListContainer extends Component {
   }
 
   // Selecting a list tab:
-  handleSelectList = listName => {
+  handleSelectedList = listName => {
     this.setState({ displayedList: listName });
   }
 
@@ -124,12 +124,12 @@ class ListContainer extends Component {
         <div className="flex-start list-tabs">
           <Tooltip title="All subscriptions" arrow>
             <div className={`list-tab shorter-tab ${allSelectedClass}`}
-              onClick={() => this.handleSelectList('all')}>
+              onClick={() => this.handleSelectedList('all')}>
               All</div>
           </Tooltip>
           <Tooltip title="Subscriptions marked infrequently used — consider cancelling!" arrow>
             <div className={`list-tab ${infreqSelectedClass}`}
-              onClick={() => this.handleSelectList('infrequent')}>
+              onClick={() => this.handleSelectedList('infrequent')}>
               Infrequently used</div>
           </Tooltip>
         </div>
