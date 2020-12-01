@@ -13,18 +13,16 @@
 
 ## Features
 ### Filter and sort
-<img src="./public/assets/filtersort.gif" width=800px/>
+<img src="./public/assets/filtersort.gif" width=600px/>
 1. Filter by category
 2. Filter by price range
 3. Sort by name
 
-<br /><br />
 ### Mark as infrequently used
-<img src="./public/assets/markinfreq.gif" width=800px/>
+<img src="./public/assets/markinfreq.gif" width=600px/>
 1. Users flag subscriptions that they use infrequently and are considering cancelling
 2. They can view this aggregation of subscriptions by clicking the Infrequently Used tab
 
-<br /><br />
 ## Components
 ### app.js
 - Contains the page header and `ListContainer`
@@ -61,7 +59,6 @@
 - Displays the list of subscriptions, mapping each subscription in `props.item` to be a `ListItem`
 - `onClick` of the flag icon, calls `props.toggleInfrequent`
 
-<br /><br />
 ## Future Directions
 - More filter-able and sort-able properties (eg. subscription start date)
 - Manual subscriptions add/delete
